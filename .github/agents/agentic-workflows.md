@@ -272,3 +272,23 @@ gh aw compile --validate
 - **Single-file output**: When creating a workflow, produce exactly **one** workflow `.md` file. Do not create separate documentation files (architecture docs, runbooks, usage guides, etc.). If documentation is needed, add a brief `## Usage` section inside the workflow file itself.
 - **Triggering runs**: Only where permitted and human-validated under `debug-agentic-workflow.md`, prefer `gh aw run <workflow-name>` over `gh workflow run <file>.lock.yml` for workflow resolution, input validation and run-tracking. Use the reviewed remote ref; explicit no-dispatch rules override user requests.
 - **CLI commands reference**: For a complete guide on all `gh aw` commands and their MCP tool equivalents (for restricted environments), see `https://raw.githubusercontent.com/github/gh-aw/main/.github/aw/cli-commands.md`
+- Create .github/workflows/update-github-info.md
+  as an agentic workflow markdown file.
+- Set the frontmatter name to exactly update-github-info.
+- Run the workflow on daily or on demand with workflow_dispatch.
+- Give the workflow edit access through the tools configuration.
+- Set network.allowed to include github.blog and github.com.
+- Use safe-outputs with create-pull-request so the agent can
+  propose changes without writing directly to main.
+- Configure the engine to use copilot-sdk
+- Tell the agent to:
+  - read notes/mona-notes.md,
+  - web fetch https://github.blog/latest/
+  - web fetch https://github.blog/changelog/
+- update site/content/github-info.md, and open
+- a pull request for Mona to review.
+- Check the syntax of the configuration for the agentic workflow is valid
+- Read external public guidance with web-fetch
+- Read repository guidance or reference files with GitHub repository API tools
+  instead of terminal, CLI, or sandboxed commands
+- Don't compile the workflow
